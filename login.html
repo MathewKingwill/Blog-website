@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title></title>
+
+</head>
+
+<style media="screen">
+  .notice {
+
+    background-color: red;
+
+    display: none;
+
+  }
+</style>
+
+<body>
+
+
+
+  <h1> Login</h1>
+  <!-- <a href="http://192.168.1.188:8080/post-blog.html"><button  type="button"
+ name="button">Create blog Page</button></a> -->
+
+
+  <p class="notice"></p>
+
+  <form id="form" class="form" action="post-blog.html" method="post">
+
+    <input type="email" name="email" value="" class="email_field">
+
+    <input type="password" name="password" value="" class="password_field">
+
+    <input type="submit" name="submit" value="Login">
+
+  </form>
+
+
+
+</body>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function() { //jquery start
+
+    $('.form').submit(function(event) {
+
+      event.preventDefault();
+
+      //request to USERS to find specific user with filter
+
+      let email = $('.email_field').val();
+
+      let password = $('.password_field').val();
+
+
+      $.getJSON('http://localhost:3000/users?email=' + email, function(data) {
+
+        if (data.length > 0) { //something back, now check if passwords match
+
+          let found_user_password = data[0].password; //nb first obj in data array and then the full_name
+
+
+          if (found_user_password == password) {
+
+            $('.notice').html('successful login').show(); //normally when a cookie created which page checks each time and allows access
+            window.location.href = "http://192.168.1.188:8080/post-blog.html";
+          } else if (found_user_password != password) {
+
+            $('.notice').html('Password incorrect').show();
+
+          }
+
+        } else {
+
+
+
+
+
+          $('.notice').html('User not found').show();
+
+        }
+
+      }); //not  GOOD way since can find password in network tab
+
+
+
+    });
+
+
+
+  }); //jquery
+</script>
+
+
+</html>

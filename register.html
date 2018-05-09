@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+
+<body>
+
+
+
+  <div>
+    <h3 id="heading">Register Account Here</h3>
+    <form id="form1" action="" method="post">
+      <label for="fname">First Name</label>
+      <input type="text" class="box" id="fname" name="firstname" placeholder="Your name.." required>
+
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+      <label for="password">Password</label>
+      <input type="password" id="Password" name="Password" placeholder="Password" required>
+      <!-- <label for="email">Confirm Password</label>
+    <input type="password" id="CPassword" name="CPassword" placeholder="Password"> -->
+
+
+      <input id="btn3" type="submit" value="Submit">
+
+      <!-- <a id="btn3"href="blog.html" type="Submit"  value="Submit"role="button">Link Button</a> -->
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $("#form1").submit(function(event) {
+
+
+        event.preventDefault();
+        $.ajax({
+          method: "POST",
+          url: "http://localhost:3000/users",
+          data: {
+            firstname: $("#fname").val(),
+            lastname: $("#lname").val(),
+            email: $("#email").val(),
+            password: $("#Password").val()
+          },
+          success: function() {
+
+            window.location.href = "http://192.168.1.188:8080/blog.html";
+          }
+
+        });
+
+      });
+    });
+  </script>
+
+</body>
+
+</html>

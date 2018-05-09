@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/blogstyles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+ <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+ <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+ <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <h4>Blog Page</h4>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="http://192.168.1.188:8080/blog.html">Blog Archive
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://192.168.1.188:8080/login.html">Login Page</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://192.168.1.188:8080/register.html">Register</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="header">
+  <h2>Your Blog Post</h2>
+</div>
+
+<div class="divrow">
+
+  <div class="">
+    <div class="card">
+      <form id="form2" class="" action="" method="post">
+
+
+        <label for="fname">Author :</label>
+        <input type="text" class="box" id="Author" name="Author" placeholder="" required>
+        <br>
+        <br>
+        <label for="lname">Title :</label>
+        <input type="text" id="Title" name="title" placeholder="" required>
+        <br>
+        <br>
+        <label for="lname">Description :</label>
+        <input type="text" id="descrip" name="discrip" placeholder="" required>
+        <br>
+        <br>
+        <label for="">Content</label>
+<textarea name="content" id="summernote" rows="8" cols="80"></textarea>
+
+          <input  type="submit" value="Submit">
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+<script>
+  $(document).ready(function() {
+      $('textarea').summernote({height: 300});
+  });
+  $("#form2").submit(function(event) {
+
+
+      event.preventDefault();
+      $.ajax({
+        method: "POST",
+        url: "http://localhost:3000/posts",
+        data: {
+          Author: $("#Author").val(),
+          title: $("#Title").val(),
+          descrip: $("#descrip").val(),
+          content: $("#summernote").val(),
+
+        },
+          success: function(){
+
+              window.location.href = "http://192.168.1.188:8080/blog.html";
+            }
+
+      });
+
+    });
+</script>
+</html>
